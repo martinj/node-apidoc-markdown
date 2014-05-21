@@ -2,71 +2,86 @@
 
 <%= project.description %>
 
-<% Object.keys(data).forEach(function (group) { -%>
-- [<%= group %>](#<%=: group | mlink %>)
-	<% Object.keys(data[group]).forEach(function (sub) { -%>
-- [<%= data[group][sub][0].title %>](#<%=: data[group][sub][0].title | mlink %>)
-	<% }); -%>
+<% _.each(files, function(file) { -%>
+- <%= helpers.markdownLink(file) %>
+<% _.each(sections[file], function(section) { -%>
+  - <%= helpers.markdownLink(section.title) %>
+<% }); -%>
+<% }); -%>
+<% if(prepend) { -%>
 
-<% }); %>
-
-<% if (prepend) { -%>
 <%- prepend %>
+
 <% } -%>
-<% Object.keys(data).forEach(function (group) { -%>
-# <%= group %>
+<% _.each(files, function(file) { -%>
 
-<% Object.keys(data[group]).forEach(function (sub) { -%>
-## <%= data[group][sub][0].title %>
+# <%= file %>
+<% _.each(sections[file], function(entry) { -%>
 
-<%-: data[group][sub][0].description | undef %>
+## <%= entry.title %>
 
-	<%-: data[group][sub][0].type | upcase %> <%= data[group][sub][0].url %>
+<%- entry.description || "" %>
 
-<% if (data[group][sub][0].parameter && data[group][sub][0].parameter.fields.Parameter.length) { -%>
+`<%- entry.type.toUpperCase() %> <%= entry.url %>`
+<% var parameters = (entry.parameter && entry.parameter.fields.Parameter) || []; -%>
+<% if(parameters.length) { -%>
+
 ### Parameters
+| Name | Type | Description |
+|------|------|-------------|
+<% _.each(parameters, function(param) { -%>
+| `<%- param.field %>` | _<%- param.type %>_ | <%= helpers.paramDescription(param) %> |
+<% }); -%>
+<% } -%>
+<% var successParameters = (entry.success && entry.success.fields) -%>
+<% if(successParameters) { -%>
 
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-<% data[group][sub][0].parameter.fields.Parameter.forEach(function (param) { -%>
-| <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %> <%- param.description %>							|
-<% }); //forech parameter -%>
-<% } //if parameters -%>
-<% if (data[group][sub][0].examples && data[group][sub][0].examples.length) { -%>
+### Success Parameters
+
+<% _.each(successParameters, function(group, groupName) { -%>
+#### <%= groupName %>
+| Name | Type | Description |
+|------|------|-------------|
+<% _.each(group, function(param) { -%>
+| `<%- param.field %>` | _<%- param.type %>_ | <%= helpers.paramDescription(param) %> |
+<% }); -%>
+<% }); -%>
+<% } -%>
+<% var examples = entry.examples || []; -%>
+<% if(examples && examples.length) { -%>
 
 ### Examples
 
-<% data[group][sub][0].examples.forEach(function (example) { -%>
+<% _.each(examples, function(example) { -%>
 <%= example.title %>
-
 ```
 <%- example.content %>
 ```
-<% }); //foreach example -%>
-<% } //if example -%>
+<% }); -%>
+<% } -%>
+<% var successExamples = (entry.success && entry.success.examples) || []; -%>
+<% if(successExamples.length) { -%>
 
-<% if (data[group][sub][0].success && data[group][sub][0].success.examples && data[group][sub][0].success.examples.length) { -%>
 ### Success Response
 
-<% data[group][sub][0].success.examples.forEach(function (example) { -%>
+<% _.each(successExamples, function(example) { -%>
 <%= example.title %>
-
 ```
 <%- example.content %>
 ```
-<% }); //foreach success example -%>
-<% } //if examples -%>
-<% if (data[group][sub][0].error && data[group][sub][0].error.examples && data[group][sub][0].error.examples.length) { -%>
+<% }); -%>
+<% } -%>
+<% var errorExamples = (entry.error && entry.error.examples) || []; -%>
+<% if(errorExamples.length) { -%>
+
 ### Error Response
 
-<% data[group][sub][0].error.examples.forEach(function (example) { -%>
+<% _.each(errorExamples, function(example) { -%>
 <%= example.title %>
-
 ```
 <%- example.content %>
 ```
-<% }); //foreach error example -%>
-<% } //if examples -%>
-<% }); //foreach sub  -%>
-<% }); //foreach group -%>
-
+<% }); -%>
+<% } -%>
+<% }); -%>
+<% }); -%>

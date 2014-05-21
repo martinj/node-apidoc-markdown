@@ -264,7 +264,7 @@
       },
       "examples": [
         {
-          "title": " Response (example):",
+          "title": "Response (example):",
           "content": "   HTTP/1.1 400 Bad Request\n   {\n     \"error\": \"UserNameTooShort\"\n   }\n"
         }
       ]
@@ -325,7 +325,7 @@
       },
       "examples": [
         {
-          "title": " Response (example):",
+          "title": "Response (example):",
           "content": "   HTTP/1.1 400 Bad Request\n   {\n     \"error\": \"UserNameTooShort\"\n   }\n"
         }
       ]
@@ -373,7 +373,7 @@
       },
       "examples": [
         {
-          "title": " Response (example):",
+          "title": "Response (example):",
           "content": "   HTTP/1.1 400 Bad Request\n   {\n     \"error\": \"UserNameTooShort\"\n   }\n"
         }
       ]
@@ -408,7 +408,7 @@
       },
       "examples": [
         {
-          "title": " Response (example):",
+          "title": "Response (example):",
           "content": "   HTTP/1.1 400 Bad Request\n   {\n     \"error\": \"UserNameTooShort\"\n   }\n"
         }
       ]
