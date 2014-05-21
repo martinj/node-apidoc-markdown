@@ -2,31 +2,36 @@
 
 apidoc example project
 
-- [User](#user)
-	- [Read data of a User](#read-data-of-a-user)
-	- [Create a new User](#create-a-new-user)
-	- [Change a new User](#change-a-new-user)
-	
+- [example/example.js](#example-example-js)
+  - [Read data of a User](#read-data-of-a-user)
+  - [Create a new User](#create-a-new-user)
+  - [Change a new User](#change-a-new-user)
 
-
-# User
+# example/example.js
 
 ## Read data of a User
 
 Compare Verison 0.3.0 with 0.2.0 and you will see the green markers with new items in version 0.3.0 and red markers with removed items since 0.2.0.
 
-	GET /user/:id
+`GET /user/:id`
 
 ### Parameters
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | _String_ | The Users-ID. |
 
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| id			| String			|  The Users-ID.							|
+### Success Parameters
+
+#### Success 200
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | _String_ | The Users-ID. |
+| `registered` | _Date_ | Registration Date. |
+| `name` | _Date_ | Fullname of the User. |
 
 ### Examples
 
 CURL example:
-
 ```
    curl -i -X POST http://localhost:3001/example
         -H 'Content-Type: application/json' \
@@ -37,7 +42,6 @@ CURL example:
 ### Success Response
 
 Success-Response (example):
-
 ```
    HTTP/1.1 200 OK
    {
@@ -47,10 +51,10 @@ Success-Response (example):
    }
 
 ```
+
 ### Error Response
 
 Error-Response (example):
-
 ```
    HTTP/1.1 401 Not Authenticated
    {
@@ -58,23 +62,29 @@ Error-Response (example):
    }
 
 ```
+
 ## Create a new User
 
 In this case "apiErrorStructure" is defined and used.
 Define blocks with params that will be used in several functions, so you dont have to rewrite them.
 
-	POST /user
+`POST /user`
 
 ### Parameters
+| Name | Type | Description |
+|------|------|-------------|
+| `name` | _String_ | Name of the User. |
 
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| name			| String			|  Name of the User.							|
+### Success Parameters
+
+#### Success 200
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | _String_ | The new Users-ID. |
 
 ### Error Response
 
- Response (example):
-
+Response (example):
 ```
    HTTP/1.1 400 Bad Request
    {
@@ -82,22 +92,21 @@ Define blocks with params that will be used in several functions, so you dont ha
    }
 
 ```
+
 ## Change a new User
 
 This function has same errors like POST /user, but errors not defined again, they were included with "apiErrorStructure"
 
-	PUT /user/:id
+`PUT /user/:id`
 
 ### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| name			| String			|  Name of the User.							|
+| Name | Type | Description |
+|------|------|-------------|
+| `name` | _String_ | Name of the User. |
 
 ### Error Response
 
- Response (example):
-
+Response (example):
 ```
    HTTP/1.1 400 Bad Request
    {
@@ -105,4 +114,3 @@ This function has same errors like POST /user, but errors not defined again, the
    }
 
 ```
-
