@@ -38,10 +38,10 @@
 
 ### <%= g %> Parameters
 
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
+| Name     | Type       | Description                           | Default    | Allowed   |
+|:---------|:-----------|:--------------------------------------|:-----------|:-----------|
 <% data[group][sub][0].parameter.fields[g].forEach(function (param) { -%>
-| <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %> <%- param.description %>							|
+| <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %> <%- param.description %>							| <%- param.defaultValue %>			| <%- param.allowedValues %>			|
 <% }); //forech (group) parameter -%>
 <% }); //forech param parameter -%>
 <% } //if parameters -%>
