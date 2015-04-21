@@ -32,15 +32,18 @@
 | <%- header.field %>			| <%- header.type %>			| <%- header.optional ? '**optional**' : '' %> <%- header.description %>							|
 <% }); //forech parameter -%>
 <% } //if parameters -%>
-<% if (data[group][sub][0].parameter && data[group][sub][0].parameter.fields.Parameter.length) { -%>
+<% if (data[group][sub][0].parameter) { -%>
 
-### Parameters
+<% Object.keys(data[group][sub][0].parameter.fields).forEach(function(g) { -%>
+
+### <%= g %> Parameters
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-<% data[group][sub][0].parameter.fields.Parameter.forEach(function (param) { -%>
+<% data[group][sub][0].parameter.fields[g].forEach(function (param) { -%>
 | <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %> <%- param.description %>							|
-<% }); //forech parameter -%>
+<% }); //forech (group) parameter -%>
+<% }); //forech param parameter -%>
 <% } //if parameters -%>
 <% if (data[group][sub][0].examples && data[group][sub][0].examples.length) { -%>
 
