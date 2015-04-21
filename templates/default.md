@@ -1,3 +1,4 @@
+<a name="top"></a>
 # <%= project.name %> v<%= project.version %>
 
 <%= project.description %>
@@ -18,6 +19,7 @@
 
 <% Object.keys(data[group]).forEach(function (sub) { -%>
 ## <%= data[group][sub][0].title %>
+[Back to top](#top)
 
 <%-: data[group][sub][0].description | undef %>
 
