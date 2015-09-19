@@ -31,7 +31,7 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 <% data[group][sub][0].header.fields.Header.forEach(function (header) { -%>
-| <%- header.field %>			| <%- header.type %>			| <%- header.optional ? '**optional**' : '' %> <%- header.description %>							|
+| <%- header.field %> | <%- header.type %> | <%- header.optional ? '**optional**' : '' %><%- header.description %>|
 <% }); //forech parameter -%>
 <% } //if parameters -%>
 <% if (data[group][sub][0].parameter) { -%>
@@ -43,7 +43,7 @@
 | Name     | Type       | Description                           |
 |:---------|:-----------|:--------------------------------------|
 <% data[group][sub][0].parameter.fields[g].forEach(function (param) { -%>
-| <%- param.field %>                   | <%- param.type %>                     | <%- param.optional ? '**optional**' : '' %> <%- param.description -%>
+| <%- param.field %> | <%- param.type %> | <%- param.optional ? '**optional**' : '' %><%- param.description -%>
 <% if (param.defaultValue) { -%>
 _Default value: <%= param.defaultValue %>_<br><% } -%>
 <% if (param.size) { -%>
@@ -54,7 +54,6 @@ _Allowed values: <%- param.allowedValues %>_<% } %>|
 <% }); //forech param parameter -%>
 <% } //if parameters -%>
 <% if (data[group][sub][0].examples && data[group][sub][0].examples.length) { -%>
-
 ### Examples
 
 <% data[group][sub][0].examples.forEach(function (example) { -%>
@@ -85,7 +84,7 @@ _Allowed values: <%- param.allowedValues %>_<% } %>|
 | Name     | Type       | Description                           |
 |:---------|:-----------|:--------------------------------------|
 <% data[group][sub][0].success.fields[g].forEach(function (param) { -%>
-| <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %><%- param.description -%>
+| <%- param.field %> | <%- param.type %> | <%- param.optional ? '**optional**' : '' %><%- param.description -%>
 <% if (param.defaultValue) { -%>
 _Default value: <%- param.defaultValue %>_<br><% } -%>
 <% if (param.size) { -%>
