@@ -40,10 +40,16 @@
 
 ### <%= g %> Parameters
 
-| Name     | Type       | Description                           | Default    | Allowed   |
-|:---------|:-----------|:--------------------------------------|:-----------|:-----------|
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
 <% data[group][sub][0].parameter.fields[g].forEach(function (param) { -%>
-| <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %> <%- param.description %>							| <%- param.defaultValue %>			| <%- param.allowedValues %>			|
+| <%- param.field %>                   | <%- param.type %>                     | <%- param.optional ? '**optional**' : '' %> <%- param.description -%>
+<% if (param.defaultValue) { -%>
+_Default value: <%= param.defaultValue %>_<br><% } -%>
+<% if (param.size) { -%>
+_Size range: <%- param.size %>_<br><% } -%>
+<% if (param.allowedValues) { -%>
+_Allowed values: <%- param.allowedValues %>_<% } %>|
 <% }); //forech (group) parameter -%>
 <% }); //forech param parameter -%>
 <% } //if parameters -%>
@@ -71,6 +77,25 @@
 ```
 <% }); //foreach success example -%>
 <% } //if examples -%>
+
+<% if (data[group][sub][0].success && data[group][sub][0].success.fields) { -%>
+<% Object.keys(data[group][sub][0].success.fields).forEach(function(g) { -%>
+### <%= g %>
+
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+<% data[group][sub][0].success.fields[g].forEach(function (param) { -%>
+| <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %><%- param.description -%>
+<% if (param.defaultValue) { -%>
+_Default value: <%- param.defaultValue %>_<br><% } -%>
+<% if (param.size) { -%>
+_Size range: <%- param.size -%>_<br><% } -%>
+<% if (param.allowedValues) { -%>
+_Allowed values: <%- param.allowedValues %>_<% } %>|
+<% }); //forech (group) parameter -%>
+<% }); //forech field -%>
+<% } //if success.fields -%>
+
 <% if (data[group][sub][0].error && data[group][sub][0].error.examples && data[group][sub][0].error.examples.length) { -%>
 ### Error Response
 
