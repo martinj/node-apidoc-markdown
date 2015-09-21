@@ -1,3 +1,4 @@
+<a name="top"></a>
 # <%= project.name %> v<%= project.version %>
 
 <%= project.description %>
@@ -18,6 +19,7 @@
 
 <% Object.keys(data[group]).forEach(function (sub) { -%>
 ## <%= data[group][sub][0].title %>
+[Back to top](#top)
 
 <%-: data[group][sub][0].description | undef %>
 
@@ -29,21 +31,29 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 <% data[group][sub][0].header.fields.Header.forEach(function (header) { -%>
-| <%- header.field %>			| <%- header.type %>			| <%- header.optional ? '**optional**' : '' %> <%- header.description %>							|
+| <%- header.field %> | <%- header.type %> | <%- header.optional ? '**optional**' : '' %><%- header.description %>|
 <% }); //forech parameter -%>
 <% } //if parameters -%>
-<% if (data[group][sub][0].parameter && data[group][sub][0].parameter.fields.Parameter.length) { -%>
+<% if (data[group][sub][0].parameter) { -%>
 
-### Parameters
+<% Object.keys(data[group][sub][0].parameter.fields).forEach(function(g) { -%>
 
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-<% data[group][sub][0].parameter.fields.Parameter.forEach(function (param) { -%>
-| <%- param.field %>			| <%- param.type %>			| <%- param.optional ? '**optional**' : '' %> <%- param.description %>							|
-<% }); //forech parameter -%>
+### <%= g %> Parameters
+
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+<% data[group][sub][0].parameter.fields[g].forEach(function (param) { -%>
+| <%- param.field %> | <%- param.type %> | <%- param.optional ? '**optional**' : '' %><%- param.description -%>
+<% if (param.defaultValue) { -%>
+_Default value: <%= param.defaultValue %>_<br><% } -%>
+<% if (param.size) { -%>
+_Size range: <%- param.size %>_<br><% } -%>
+<% if (param.allowedValues) { -%>
+_Allowed values: <%- param.allowedValues %>_<% } %>|
+<% }); //forech (group) parameter -%>
+<% }); //forech param parameter -%>
 <% } //if parameters -%>
 <% if (data[group][sub][0].examples && data[group][sub][0].examples.length) { -%>
-
 ### Examples
 
 <% data[group][sub][0].examples.forEach(function (example) { -%>
@@ -66,6 +76,25 @@
 ```
 <% }); //foreach success example -%>
 <% } //if examples -%>
+
+<% if (data[group][sub][0].success && data[group][sub][0].success.fields) { -%>
+<% Object.keys(data[group][sub][0].success.fields).forEach(function(g) { -%>
+### <%= g %>
+
+| Name     | Type       | Description                           |
+|:---------|:-----------|:--------------------------------------|
+<% data[group][sub][0].success.fields[g].forEach(function (param) { -%>
+| <%- param.field %> | <%- param.type %> | <%- param.optional ? '**optional**' : '' %><%- param.description -%>
+<% if (param.defaultValue) { -%>
+_Default value: <%- param.defaultValue %>_<br><% } -%>
+<% if (param.size) { -%>
+_Size range: <%- param.size -%>_<br><% } -%>
+<% if (param.allowedValues) { -%>
+_Allowed values: <%- param.allowedValues %>_<% } %>|
+<% }); //forech (group) parameter -%>
+<% }); //forech field -%>
+<% } //if success.fields -%>
+
 <% if (data[group][sub][0].error && data[group][sub][0].error.examples && data[group][sub][0].error.examples.length) { -%>
 ### Error Response
 
