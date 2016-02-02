@@ -24,3 +24,5 @@ Generate from included example data
 
 
 [View generated example](https://github.com/martinj/node-apidoc-markdown/blob/master/examples/example.md)
+## Donations
+Would you like to buy me a beer? Send bitcoin to 3JjxJydvoJjTrhLL86LGMc8cNB16pTAF3y
