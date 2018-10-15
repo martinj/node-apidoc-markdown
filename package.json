@@ -30,7 +30,7 @@
   "dependencies": {
     "optimist": "~0.6.0",
     "underscore": "~1.5.2",
-    "ejs": "~0.8.5"
+    "ejs": "~2.5.5"
   },
   "devDependencies": {
     "release-it": "0.0.12"
